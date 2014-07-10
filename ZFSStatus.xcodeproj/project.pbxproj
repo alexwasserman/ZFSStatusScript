@@ -11,7 +11,7 @@
 		FA461D76196CB08E00CBD011 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA461D74196CB08E00CBD011 /* InfoPlist.strings */; };
 		FA461D78196CB08E00CBD011 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA461D77196CB08E00CBD011 /* main.m */; };
 		FA461D7C196CB08E00CBD011 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = FA461D7A196CB08E00CBD011 /* Credits.rtf */; };
-		FA461D7F196CB08E00CBD011 /* com_alexwasserman_comAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA461D7E196CB08E00CBD011 /* com_alexwasserman_comAppDelegate.m */; };
+		FA461D7F196CB08E00CBD011 /* ZFSStatusAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA461D7E196CB08E00CBD011 /* ZFSStatusAppDelegate.m */; };
 		FA461D82196CB08E00CBD011 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA461D80196CB08E00CBD011 /* MainMenu.xib */; };
 		FA461D84196CB08E00CBD011 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA461D83196CB08E00CBD011 /* Images.xcassets */; };
 		FA461D8B196CB08E00CBD011 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA461D8A196CB08E00CBD011 /* XCTest.framework */; };
@@ -41,8 +41,8 @@
 		FA461D77196CB08E00CBD011 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FA461D79196CB08E00CBD011 /* ZFSStatus-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZFSStatus-Prefix.pch"; sourceTree = "<group>"; };
 		FA461D7B196CB08E00CBD011 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		FA461D7D196CB08E00CBD011 /* com_alexwasserman_comAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = com_alexwasserman_comAppDelegate.h; sourceTree = "<group>"; };
-		FA461D7E196CB08E00CBD011 /* com_alexwasserman_comAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = com_alexwasserman_comAppDelegate.m; sourceTree = "<group>"; };
+		FA461D7D196CB08E00CBD011 /* ZFSStatusAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZFSStatusAppDelegate.h; sourceTree = "<group>"; };
+		FA461D7E196CB08E00CBD011 /* ZFSStatusAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZFSStatusAppDelegate.m; sourceTree = "<group>"; };
 		FA461D81196CB08E00CBD011 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		FA461D83196CB08E00CBD011 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FA461D89196CB08E00CBD011 /* ZFSStatusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZFSStatusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,8 +115,8 @@
 		FA461D71196CB08E00CBD011 /* ZFSStatus */ = {
 			isa = PBXGroup;
 			children = (
-				FA461D7D196CB08E00CBD011 /* com_alexwasserman_comAppDelegate.h */,
-				FA461D7E196CB08E00CBD011 /* com_alexwasserman_comAppDelegate.m */,
+				FA461D7E196CB08E00CBD011 /* ZFSStatusAppDelegate.m */,
+				FA461D7D196CB08E00CBD011 /* ZFSStatusAppDelegate.h */,
 				FA461D80196CB08E00CBD011 /* MainMenu.xib */,
 				FA461D83196CB08E00CBD011 /* Images.xcassets */,
 				FA461D72196CB08E00CBD011 /* Supporting Files */,
@@ -253,7 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA461D7F196CB08E00CBD011 /* com_alexwasserman_comAppDelegate.m in Sources */,
+				FA461D7F196CB08E00CBD011 /* ZFSStatusAppDelegate.m in Sources */,
 				FA461D78196CB08E00CBD011 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,6 +467,7 @@
 				FA461D9B196CB08E00CBD011 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FA461D9C196CB08E00CBD011 /* Build configuration list for PBXNativeTarget "ZFSStatusTests" */ = {
 			isa = XCConfigurationList;
@@ -475,6 +476,7 @@
 				FA461D9E196CB08E00CBD011 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
