@@ -42,9 +42,6 @@ NSString *Status = @"Sampling";
                    selector:@selector(getZfsStatus:)
                    userInfo:nil
                    repeats:YES];
-    
-    [updateTimer fire];
-
 }
 
 
