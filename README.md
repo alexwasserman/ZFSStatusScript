@@ -8,7 +8,8 @@ Requirements
 ------------
 
 
- * ZFS installed (zpool in /usr/local/sbin with +s set). 
+ * ZFS installed [https://openzfsonosx.org/]
+ * zpool in /usr/local/sbin with +s set. This is the default location. 
 
 
 Screenshots
