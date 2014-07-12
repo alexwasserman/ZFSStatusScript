@@ -24,11 +24,11 @@ NSString *Status = @"Sampling";
 - (void)awakeFromNib
 {
     
-    [self reUpdateTimer];
+    [self runTimer];
     
 }
 
-- (void)reUpdateTimer
+- (void)runTimer
 {
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{intervalKey: defaultInterval}];
@@ -62,7 +62,7 @@ NSString *Status = @"Sampling";
     [defaults setObject:poolName forKey:poolNameKey];
     
     [updateTimer invalidate];
-    [self reUpdateTimer];
+    [self runTimer];
     
     NSLog(@"Saving prefs");
     
