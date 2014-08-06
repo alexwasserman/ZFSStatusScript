@@ -120,7 +120,7 @@ NSString *Status = @"Sampling";
     
     statusItem.title = [NSString stringWithString:(Status)];
     
-    NSString *completeStatusCommand = [NSString stringWithFormat:@"/usr/local/sbin/zpool status %@ | grep state: | awk '{ printf \"%%s\", $2 }'", PoolName ];
+    NSString *completeStatusCommand = [NSString stringWithFormat:@"/usr/sbin/zpool status %@ | grep state: | awk '{ printf \"%%s\", $2 }'", PoolName ];
     
     NSString *zfsStatus = runCommand(completeStatusCommand);
     
@@ -144,7 +144,7 @@ NSString *Status = @"Sampling";
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{poolNameKey: defaultValue}];
     NSString *PoolName = [[NSUserDefaults standardUserDefaults] stringForKey:poolNameKey];
     
-    NSString *completeDetailsCommand = [NSString stringWithFormat:@"date && /usr/local/sbin/zpool status %@", PoolName ];
+    NSString *completeDetailsCommand = [NSString stringWithFormat:@"date && /usr/sbin/zpool status %@", PoolName ];
     
     NSString *zfsStatusDetail = runCommand(completeDetailsCommand);
     
