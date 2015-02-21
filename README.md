@@ -1,7 +1,7 @@
 ZFSStatus
 =========
 
-OSX menu bar app to provide ZFS zpool status. Preferences allow you to set the pool name, and the refresh interval for the status in the menu bar. The status view in the menu pane refreshes on every click.
+OSX menu bar app to provide ZFS zpool status. Preferences allow you to set the pool name, and the refresh interval for the status in the menu bar. The status view in the menu pane refreshes on every click. Option to start/stop scubbing of the pool.
 
 
 Requirements
@@ -9,7 +9,7 @@ Requirements
 
 
  * ZFS installed - https://openzfsonosx.org/
- * zpool in /usr/local/sbin with +s set. This is the default location. 
+ * zpool in /usr/sbin with +s set. This is the default location. 
 
 
 Screenshots
