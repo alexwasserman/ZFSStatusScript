@@ -102,6 +102,8 @@ NSString *Status = @"Sampling";
     zfsMenu = [[NSMenu alloc] initWithTitle:@""];
     [zfsMenu setDelegate:self];
     [zfsMenu addItem:[NSMenuItem separatorItem]];
+    [zfsMenu addItemWithTitle:@"Start/Stop Scrub" action:@selector(scrub:) keyEquivalent:@""];
+    [zfsMenu addItem:[NSMenuItem separatorItem]];
     NSMenuItem *prefsMenuItem = [zfsMenu addItemWithTitle:@"Preferences" action:@selector(makeKeyAndOrderFront:) keyEquivalent:@""];
     [zfsMenu addItemWithTitle:@"About ZFSStatus" action:@selector(orderFrontStandardAboutPanel:) keyEquivalent:@""];
     [zfsMenu addItemWithTitle:@"Quit ZFSStatus" action:@selector(terminate:) keyEquivalent:@""];
@@ -112,9 +114,30 @@ NSString *Status = @"Sampling";
     
 }
 
-- (void)getZfsStatus:(id)sender
+- (void)scrub:(id)sender
 {
         
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{poolNameKey: defaultValue}];
+    NSString *PoolName = [[NSUserDefaults standardUserDefaults] stringForKey:poolNameKey];
+    
+    NSString *scrubCommand = [NSString stringWithFormat:@"/usr/sbin/zpool status %@ | grep 'scan: scrub in progress'", PoolName ];
+    NSString *startScrubCommand = [NSString stringWithFormat:@"/usr/sbin/zpool scrub %@ ", PoolName ];
+    NSString *stopScrubCommand = [NSString stringWithFormat:@"/usr/sbin/zpool scrub -s %@ ", PoolName ];
+    
+    NSString *scrubStatus = runCommand(scrubCommand);
+    
+    if ( [scrubStatus length] == 0 )
+        runCommand(startScrubCommand);
+    else if(scrubStatus != NULL)
+        runCommand(stopScrubCommand);
+    
+    NSLog(@"Updating menu bar status");
+
+}
+
+- (void)getZfsStatus:(id)sender
+{
+    
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{poolNameKey: defaultValue}];
     NSString *PoolName = [[NSUserDefaults standardUserDefaults] stringForKey:poolNameKey];
     
@@ -133,8 +156,9 @@ NSString *Status = @"Sampling";
         statusItem.title = [NSString stringWithString:(Status) ];
     
     NSLog(@"Updating menu bar status");
-
+    
 }
+
 
 
 - (void)menuNeedsUpdate:(NSMenu *)zfsMenu
@@ -162,7 +186,7 @@ NSString *Status = @"Sampling";
                                     textFont, NSFontAttributeName,
                                     NULL];
     
-    while ([self->zfsMenu numberOfItems] > 4)
+    while ([self->zfsMenu numberOfItems] > 6)
         [self->zfsMenu removeItemAtIndex:0];
     
     if ( [lines count] == 0 ) {
