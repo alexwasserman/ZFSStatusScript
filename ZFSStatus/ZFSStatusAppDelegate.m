@@ -7,6 +7,7 @@
 //
 
 #import "ZFSStatusAppDelegate.h"
+// #import <libzfs.h>
 
 @interface ZFSStatusAppDelegate ()
 
@@ -18,14 +19,13 @@
 #define defaultInterval @"300"
 #define poolNameKey @"poolName"
 #define intervalKey @"refreshInterval"
+// libzfs_handle_t *g_zfs;
 
 NSString *Status = @"Sampling";
 
 - (void)awakeFromNib
 {
-    
     [self runTimer];
-    
 }
 
 - (void)runTimer
@@ -39,7 +39,7 @@ NSString *Status = @"Sampling";
     updateTimer = [NSTimer
                    scheduledTimerWithTimeInterval:(interval)
                    target:self
-                   selector:@selector(getZfsStatus:)
+                   selector:@selector(setZfsStatus:)
                    userInfo:nil
                    repeats:YES];
 }
@@ -72,6 +72,7 @@ NSString *Status = @"Sampling";
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     NSString *poolName = [defaults stringForKey:poolNameKey];
@@ -83,12 +84,13 @@ NSString *Status = @"Sampling";
     [refreshIntervalField setStringValue:interval];
     
     [self setupStatusItem];
-    [self getZfsStatus:nil];
+    [self setZfsStatus:nil];
 
 }
 
 - (void)setupStatusItem
 {
+    
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     statusItem.title = [NSString stringWithString:(Status) ];
     statusItem.image = [NSImage imageNamed:@"icon"];
@@ -121,8 +123,8 @@ NSString *Status = @"Sampling";
     NSString *PoolName = [[NSUserDefaults standardUserDefaults] stringForKey:poolNameKey];
     
     NSString *scrubCommand = [NSString stringWithFormat:@"/usr/sbin/zpool status %@ | grep 'scan: scrub in progress'", PoolName ];
-    NSString *startScrubCommand = [NSString stringWithFormat:@"/usr/sbin/zpool scrub %@ ", PoolName ];
-    NSString *stopScrubCommand = [NSString stringWithFormat:@"/usr/sbin/zpool scrub -s %@ ", PoolName ];
+    NSString *startScrubCommand = [NSString stringWithFormat:@"sudo /usr/sbin/zpool scrub %@ ", PoolName ];
+    NSString *stopScrubCommand = [NSString stringWithFormat:@"sudo /usr/sbin/zpool scrub -s %@ ", PoolName ];
     
     NSString *scrubStatus = runCommand(scrubCommand);
     
@@ -135,11 +137,16 @@ NSString *Status = @"Sampling";
 
 }
 
-- (void)getZfsStatus:(id)sender
+- (void)setZfsStatus:(id)sender
 {
-    
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{poolNameKey: defaultValue}];
     NSString *PoolName = [[NSUserDefaults standardUserDefaults] stringForKey:poolNameKey];
+    const char *charPoolName = [PoolName UTF8String];
+    
+    // zpool_handle_t *zhp;
+    // zhp = zpool_open(g_zfs, charPoolName);
+    
+    // zpool_get_state(zhp);
     
     statusItem.title = [NSString stringWithString:(Status)];
     
@@ -167,10 +174,24 @@ NSString *Status = @"Sampling";
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{poolNameKey: defaultValue}];
     NSString *PoolName = [[NSUserDefaults standardUserDefaults] stringForKey:poolNameKey];
+    const char *charPoolName = [PoolName UTF8String];
     
-    NSString *completeDetailsCommand = [NSString stringWithFormat:@"date && /usr/sbin/zpool status %@", PoolName ];
+    // zpool_handle_t *zhp;
+    // zhp = zpool_open(g_zfs, charPoolName);
+    
+    // int zpoolState = zpool_get_state(zhp);
+    
+    // if (zpool_get_state(zhp) == POOL_STATE_UNAVAIL) {
+    //     NSLog (@"Pool unavailable");
+    // }
+    
+    
+    
+    NSString *completeDetailsCommand = [NSString stringWithFormat:@"date && /usr/sbin/zpool status -L %@", PoolName ];
     
     NSString *zfsStatusDetail = runCommand(completeDetailsCommand);
+     
+    
     
     NSMutableArray *lines = [NSMutableArray arrayWithArray:[[NSString stringWithString:zfsStatusDetail] componentsSeparatedByString:@"\n"]];
     
